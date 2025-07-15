@@ -7,9 +7,13 @@
 
 Numerical methods for quantum mereology
 
-## Features
-
-* TODO
+This is the Python package that focuses on the following problem :
+Given a many body spin 1/2 Hamiltonian $H$, find a unitary $U$ such that $H' = U H U^\dagger$ has a particular tensor product structure.
+In particular, minimize the cost function
+$$
+C(h) = \sum_{n} |E_i-\epsion_i|^2
+$$
+where $E_i$ are the eigenvalues of $H$ and $\epsilon_i$ are the eigenvalues of $H'=\sum_i h_i \tau_i$ and $\tau_i$ are a set of Pauli strings that represent a particular tensor product structure.
 
 ## Installation
 
@@ -19,6 +23,11 @@ From github:
 pip install git+https://github.com/nicolasloizeau/quantum_mereology.git
 ```
 
+## Example
+
+```python
+
+```
 
 ## Citation
 
@@ -39,7 +48,7 @@ pip install git+https://github.com/nicolasloizeau/quantum_mereology.git
     url={https://doi.org/10.1007/s10701-024-00813-2}
 }
 
-@article{
+@article{Loizeau2023,
     doi:10.1073/pnas.2308006120,
     author = {Nicolas Loizeau  and Flaviano Morone  and Dries Sels },
     title = {Unveiling order from chaos by approximate 2-localization of random matrices},
