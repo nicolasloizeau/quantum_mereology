@@ -8,3 +8,11 @@ Numerical methods for quantum mereology
 ## Features
 
 * TODO
+
+## Installation
+
+From github:
+
+```bash
+pip install git+https://github.com/nicolasloizeau/quantum_mereology.git
+```
