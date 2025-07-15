@@ -2,7 +2,7 @@
 
 <!-- [![PyPI Version](https://img.shields.io/pypi/v/quantum_mereology.svg)](https://pypi.python.org/pypi/quantum_mereology) -->
 [![Tests Status](https://github.com/nicolasloizeau/quantum_mereology/actions/workflows/test.yml/badge.svg)](https://github.com/nicolasloizeau/quantum_mereology/actions/workflows/test.yml)
-[![](https://img.shields.io/badge/docs-stable-blue.svg)](https://nicolasloizeau.github.io/quantum_mereology/)
+[![](https://img.shields.io/badge/docs-blue.svg)](https://nicolasloizeau.github.io/quantum_mereology/)
 
 Numerical methods for quantum mereology
 
