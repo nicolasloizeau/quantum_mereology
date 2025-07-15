@@ -80,10 +80,34 @@ class Partitioner:
 
 
 def partition(H, DA, verbose=False, maxiter=1000, x0=None):
-    """
-    Partitions the Hamiltonian H into two diagonal sectors A and B
-    H : a numpy array
-    DA : dimension of subsystem A
+    """Partition a Hamiltonian into two subsystems.
+
+
+    Parameters
+    ----------
+    H : numpy.ndarray
+        Hamiltonian matrix to partition.
+    DA : int
+        Dimension of subsystem A.
+    verbose : bool, optional
+        Whether to display optimization progress, by default False.
+    maxiter : int, optional
+        Maximum number of iterations for optimization, by default 1000.
+    x0 : numpy.ndarray, optional
+        Initial guess for optimization parameters, by default None.
+
+    Returns
+    -------
+    dict
+        Dictionary containing:
+        - 'U': Unitary transformation matrix
+        - 'EA': Eigenvalues of subsystem A
+        - 'EB': Eigenvalues of subsystem B
+        - 'Eint': Interaction energy terms
+
+    Notes
+    -----
+    The Hamiltonian must be a square matrix with dimension divisible by DA.
     """
     assert len(H)%DA == 0, "H must be a square matrix with dimension divisible by DA"
     E, V = eigh(H)
