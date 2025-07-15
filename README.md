@@ -10,9 +10,7 @@ Numerical methods for quantum mereology
 This is the Python package that focuses on the following problem :
 Given a many body spin 1/2 Hamiltonian $H$, find a unitary $U$ such that $H' = U H U^\dagger$ has a particular tensor product structure.
 In particular, minimize the cost function
-$$
-C(h) = \sum_{n} |E_i-\epsion_i|^2
-$$
+$$C(h) = \sum_{n} |E_i-\epsion_i|^2$$
 where $E_i$ are the eigenvalues of $H$ and $\epsilon_i$ are the eigenvalues of $H'=\sum_i h_i \tau_i$ and $\tau_i$ are a set of Pauli strings that represent a particular tensor product structure.
 
 ## Installation
