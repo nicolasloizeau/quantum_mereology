@@ -44,8 +44,15 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#core-functions">Core Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#random-matrix-functions">Random Matrix Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#core-functions">Core Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#quantum_mereology.partition"><code class="docutils literal notranslate"><span class="pre">partition()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#random-matrix-functions">Random Matrix Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#quantum_mereology.GOE"><code class="docutils literal notranslate"><span class="pre">GOE()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quantum_mereology.GUE"><code class="docutils literal notranslate"><span class="pre">GUE()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -78,9 +85,79 @@
 <h1>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h1>
 <section id="core-functions">
 <h2>Core Functions<a class="headerlink" href="#core-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="quantum_mereology.partition">
+<span class="sig-prename descclassname"><span class="pre">quantum_mereology.</span></span><span class="sig-name descname"><span class="pre">partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantum_mereology.partition" title="Link to this definition"></a></dt>
+<dd><p>Partition a Hamiltonian into two subsystems.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>H<span class="classifier">numpy.ndarray</span></dt><dd><p>Hamiltonian matrix to partition.</p>
+</dd>
+<dt>DA<span class="classifier">int</span></dt><dd><p>Dimension of subsystem A.</p>
+</dd>
+<dt>verbose<span class="classifier">bool, optional</span></dt><dd><p>Whether to display optimization progress, by default False.</p>
+</dd>
+<dt>maxiter<span class="classifier">int, optional</span></dt><dd><p>Maximum number of iterations for optimization, by default 1000.</p>
+</dd>
+<dt>x0<span class="classifier">numpy.ndarray, optional</span></dt><dd><p>Initial guess for optimization parameters, by default None.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing:
+- ‘U’: Unitary transformation matrix
+- ‘EA’: Eigenvalues of subsystem A
+- ‘EB’: Eigenvalues of subsystem B
+- ‘Eint’: Interaction energy terms</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<p>The Hamiltonian must be a square matrix with dimension divisible by DA.</p>
+</section>
+</dd></dl>
+
 </section>
 <section id="random-matrix-functions">
 <h2>Random Matrix Functions<a class="headerlink" href="#random-matrix-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="quantum_mereology.GOE">
+<span class="sig-prename descclassname"><span class="pre">quantum_mereology.</span></span><span class="sig-name descname"><span class="pre">GOE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantum_mereology.GOE" title="Link to this definition"></a></dt>
+<dd><p>Generates a random matrix from the Gaussian Orthogonal Ensemble (GOE).</p>
+<section id="id1">
+<h3>Parameters:<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>D<span class="classifier">int</span></dt><dd><p>Dimension of the square matrix.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns:<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>H : ndarray</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="quantum_mereology.GUE">
+<span class="sig-prename descclassname"><span class="pre">quantum_mereology.</span></span><span class="sig-name descname"><span class="pre">GUE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantum_mereology.GUE" title="Link to this definition"></a></dt>
+<dd><p>Generates a random matrix from the Gaussian Unitary Ensemble (GUE).</p>
+<section id="id3">
+<h3>Parameters:<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>D<span class="classifier">int</span></dt><dd><p>Dimension of the square matrix.</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h3>Returns:<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>H : ndarray</p>
+</section>
+</dd></dl>
+
 </section>
 </section>
 
