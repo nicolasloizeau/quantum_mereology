@@ -2,9 +2,7 @@
 Quantum Mereology
 ==================
 
-.. comment:: .. image:: https://img.shields.io/pypi/v/quantum_mereology.svg
-             :target: https://pypi.python.org/pypi/quantum_mereology
-             :alt: PyPI Version
+
 
 .. image:: https://github.com/nicolasloizeau/quantum_mereology/actions/workflows/test.yml/badge.svg
    :target: https://github.com/nicolasloizeau/quantum_mereology/actions/workflows/test.yml
