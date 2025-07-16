@@ -5,8 +5,9 @@ Core Functions
 -------------
 
 .. autofunction:: quantum_mereology.partition
+.. autofunction:: quantum_mereology.localize
 
-Random Matrix Functions
+Random Matrices
 ----------------------
 
 .. autofunction:: quantum_mereology.GOE

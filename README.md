@@ -28,7 +28,7 @@ pip install git+https://github.com/nicolasloizeau/quantum_mereology.git
 
 ## Citation
 
-```
+```bibtex
 @Article{Loizeau2024,
     author={Loizeau, Nicolas
     and Sels, Dries},
