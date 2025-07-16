@@ -1,0 +1,147 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partitioning example &mdash; Quantum Mereology  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=0745d1ac" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/github_style.css?v=1093691d" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Localization example" href="example_localization.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quantum Mereology
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Partitioning example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_localization.html">Localization example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quantum Mereology</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Partitioning example</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/nicolasloizeau/quantum_mereology/blob/main/docs/example_partitioning.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="partitioning-example">
+<h1>Partitioning example<a class="headerlink" href="#partitioning-example" title="Link to this heading"></a></h1>
+<p>Lets partition a random matrix into two sectors</p>
+<p>First we construct a random GOE matrix H of dimentions D and specify DA the dimension of subsystem A.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quantum_mereology</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="nc">D</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">10</span>
+<span class="nc">DA</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># dimention of subsystem A</span>
+<span class="nc">H</span> <span class="o">=</span> <span class="nc">GOE</span><span class="p">(</span><span class="nc">D</span><span class="p">)</span> <span class="c1"># intial Hamiltonian</span>
+<span class="nc">DB</span> <span class="o">=</span> <span class="nc">D</span><span class="o">//</span><span class="nc">DA</span>
+</pre></div>
+</div>
+<p>Partition the Hamiltonian :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="kp">partition</span><span class="p">(</span><span class="nc">H</span><span class="p">,</span> <span class="nc">DA</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nc">U</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="nc">U</span>
+<span class="nc">EA</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="nc">EA</span>
+<span class="nc">EB</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="nc">EB</span>
+<span class="nc">Eint</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="nc">Eint</span>
+</pre></div>
+</div>
+<p>Now we can construct HA and HB and check how good the partitioning is</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nc">HA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="kp">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="kp">diag</span><span class="p">(</span><span class="nc">EA</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="kp">identity</span><span class="p">(</span><span class="nc">DB</span><span class="p">))</span>
+<span class="nc">HB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="kp">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="kp">identity</span><span class="p">(</span><span class="nc">DA</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="kp">diag</span><span class="p">(</span><span class="nc">EB</span><span class="p">))</span>
+
+<span class="c1"># interaction Hamiltonian</span>
+<span class="nc">Hint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="kp">diag</span><span class="p">(</span><span class="nc">Eint</span><span class="p">)</span>
+
+<span class="c1"># Check that U partitions H into HA, HB and Hint</span>
+<span class="nc">Hp</span> <span class="o">=</span> <span class="nc">U</span><span class="nd">@H@U</span><span class="o">.</span><span class="nc">T</span><span class="o">.</span><span class="kp">conj</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="kp">norm</span><span class="p">(</span><span class="nc">Hp</span> <span class="o">-</span> <span class="nc">HA</span><span class="o">-</span><span class="nc">HB</span><span class="o">-</span><span class="nc">Hint</span><span class="p">))</span>
+
+<span class="c1"># Check how good the partition is</span>
+<span class="nb">print</span><span class="p">(</span><span class="kp">norm</span><span class="p">(</span><span class="nc">Hint</span><span class="p">)</span><span class="o">/</span><span class="kp">norm</span><span class="p">(</span><span class="nc">H</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example_localization.html" class="btn btn-neutral float-right" title="Localization example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Nicolas Loizeau.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

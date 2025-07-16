@@ -17,10 +17,11 @@
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Reference" href="api.html" /> 
+    <link rel="next" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,7 +45,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_partitioning.html">Partitioning example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_localization.html">Localization example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
 </ul>
 
         </div>
@@ -73,12 +77,25 @@
              
   <section id="quantum-mereology">
 <h1>Quantum Mereology<a class="headerlink" href="#quantum-mereology" title="Link to this heading"></a></h1>
+<p>This package focuses on the following problem :
+Given a many body spin 1/2 Hamiltonian <span class="math notranslate nohighlight">\(H\)</span>, find a unitary <span class="math notranslate nohighlight">\(U\)</span> such that
+<span class="math notranslate nohighlight">\(U H U^\dagger\)</span> has a particular tensor product structure.
+In particular, minimize the cost function
+<span class="math notranslate nohighlight">\(C(h) = \sum_{n} |E_n-\varepsilon_n|^2\)</span>
+where <span class="math notranslate nohighlight">\(E_n\)</span> are the eigenvalues of <span class="math notranslate nohighlight">\(H\)</span> and
+<span class="math notranslate nohighlight">\(\varepsilon_n\)</span> are the eigenvalues of
+<span class="math notranslate nohighlight">\(H'=\sum_i h_i \tau_i\)</span> and <span class="math notranslate nohighlight">\(\tau_i\)</span> are a set of Pauli strings
+that represent a particular tensor product structure.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api.html">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#core-functions">Core Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#random-matrices">Random Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_partitioning.html">Partitioning example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_localization.html">Localization example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#core-functions">Core Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#random-matrices">Random Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#pauli-strings">Pauli strings</a></li>
 </ul>
 </li>
 </ul>
@@ -89,7 +106,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="api.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
