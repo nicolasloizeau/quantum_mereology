@@ -8,9 +8,7 @@ Quantum Mereology
    :target: https://github.com/nicolasloizeau/quantum_mereology/actions/workflows/test.yml
    :alt: Tests Status
 
-.. image:: https://img.shields.io/badge/docs-blue.svg
-   :target: https://nicolasloizeau.github.io/quantum_mereology/
-   :alt: Documentation
+
 
 Numerical methods for quantum mereology
 
