@@ -46,7 +46,6 @@ pip install git+https://github.com/nicolasloizeau/quantum_mereology.git
 }
 
 @article{Loizeau2023,
-    doi:10.1073/pnas.2308006120,
     author = {Nicolas Loizeau  and Flaviano Morone  and Dries Sels },
     title = {Unveiling order from chaos by approximate 2-localization of random matrices},
     journal = {Proceedings of the National Academy of Sciences},
