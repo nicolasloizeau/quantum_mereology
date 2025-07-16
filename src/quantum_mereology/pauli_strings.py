@@ -82,12 +82,12 @@ def local1Z(N):
     for i in range(N):
         pauli_indexes = np.zeros(N, dtype=int)
         pauli_indexes[i] = 3
-        taus.append(operator_from_indexes(pauli_indexes, dtype=dtype))
+        taus.append(operator_from_indexes(pauli_indexes, dtype='float64'))
     return taus
 
 
 
-def local1(N):
+def local1(N, dtype='float64'):
     """
     Generate a list of 1-local Pauli strings of N qubits.
 

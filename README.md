@@ -21,7 +21,7 @@ pip install git+https://github.com/nicolasloizeau/quantum_mereology.git
 ```
 
 ## Example
-Given H a GOE matrix, find a U such that UHU^\dagger is as 2-local as possible :
+Given $H$ a GOE matrix, find a U such that $UHU^\dagger$ is as 2-local as possible :
 
 ```python
 import numpy as np
