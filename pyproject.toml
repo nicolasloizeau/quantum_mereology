@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "quantum_mereology"
 description = "Numerical methods for quantum mereology"
-readme = "README.rst"
+readme = "README.md"
 authors = [{ name = "Nicolas Loizeau", email = "nicolasloizeau@gmail.com" }]
 maintainers = [{ name = "Nicolas Loizeau", email = "nicolasloizeau@gmail.com" }]
 classifiers = []
