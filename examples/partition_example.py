@@ -11,10 +11,10 @@ DB = D//DA
 # we partition H into diagonal sectors A and B
 # U is the unitary matrix that partitions H
 res = partition(H, DA, verbose=True)
-U = res["U"]
-EA = res["EA"]
-EB = res["EB"]
-Eint = res["Eint"]
+U = res.U
+EA = res.EA
+EB = res.EB
+Eint = res.Eint
 
 # we build the diagonal matrices correspondig to sectors A and B :
 # HA=EA⊗I, HB=I⊗EB

@@ -3,6 +3,8 @@ from numpy.linalg import norm, eigh, eigvalsh
 from scipy.optimize import minimize
 from time import time
 from .permutations import *
+from collections import namedtuple
+
 
 def buildHA(A, DB):
     """eqivalent to np.diag(np.kron(np.diag(A), np.identity(len(B))))"""
@@ -98,12 +100,11 @@ def partition(H, DA, verbose=False, maxiter=1000, x0=None):
 
     Returns
     -------
-    dict
-        Dictionary containing:
-        - 'U': Unitary transformation matrix
-        - 'EA': Eigenvalues of subsystem A
-        - 'EB': Eigenvalues of subsystem B
-        - 'Eint': Interaction energy terms
+    PartitionResult namedtuple containing:
+    - U: Unitary matrix that partition H
+    - EA: Eigenvalues of subsystem A
+    - EB: Eigenvalues of subsystem B
+    - Eint: Interaction term
 
     Notes
     -----
@@ -118,9 +119,6 @@ def partition(H, DA, verbose=False, maxiter=1000, x0=None):
     HA = buildHA(EA, len(EB))
     HB = buildHB(EB, len(EA))
     Eint = np.diag(H2)-HA-HB
-    result = {}
-    result["U"] = U
-    result["EA"] = EA
-    result["EB"] = EB
-    result["Eint"] = Eint
+    PartitionResult = namedtuple('PartitionResult', 'U EA EB Eint')
+    result = PartitionResult(U=U, EA=EA, EB=EB, Eint=Eint)
     return result

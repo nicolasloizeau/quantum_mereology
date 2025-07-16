@@ -37,5 +37,3 @@ html_context = {
     "github_version": "main",
     "conf_py_path": "/docs/",
 }
-
-# github_url = "https://github.nicolasloizeau.com/quantum_mereology"

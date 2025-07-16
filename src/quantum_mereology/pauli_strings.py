@@ -22,16 +22,34 @@ def operator_from_indexes(indexes, dtype='float64'):
 
 
 
-def local2(N, dtype='float64', sites=[]):
+def local2(N, dtype='float64'):
     """
-    generates a list of 2-local pauli strings of lenght N
+    Generate a list of 2-local Pauli strings of N qubits.
+
+    Parameters
+    ----------
+    N : int
+        Number of qubits.
+    dtype : str, optional
+        Data type for the operators. Use 'complex128' for complex operators,
+        'float64' for real operators. Default is 'float64'.
+
+    Returns
+    -------
+    list
+        List of 2-local Pauli string operators as sparse matrices.
+
+    Notes
+    -----
+    If dtype='float64', complex strings (those with a single Y operator) are excluded.
     """
     taus = []
     # 1-local
     for i in range(N):
-        pauli_indexes = np.zeros(N, dtype=int)
-        pauli_indexes[i] = 3
-        taus.append(operator_from_indexes(pauli_indexes, dtype=dtype))
+        for k in range(1,4):
+            pauli_indexes = np.zeros(N, dtype=int)
+            pauli_indexes[i] = k
+            taus.append(operator_from_indexes(pauli_indexes, dtype=dtype))
     # 2-local
     for i, j in list(combinations(range(N), 2)):
         for k, l in product(range(1,4), repeat=2):
@@ -45,10 +63,20 @@ def local2(N, dtype='float64', sites=[]):
 
 
 
-def local1(N, dtype='float64'):
+def local1Z(N):
     """
-    generates a list of single qubit Z pauli strings
-    (eg Z1111, 1Z111, 11Z11 ....)
+    Generate a list of Z operators N qubits.
+
+    Parameters
+    ----------
+    N : int
+        Number of qubits.
+
+    Returns
+    -------
+    list
+        List of Zi Pauli string operators as sparse matrices.
+
     """
     taus = []
     for i in range(N):
@@ -58,8 +86,60 @@ def local1(N, dtype='float64'):
     return taus
 
 
+
+def local1(N):
+    """
+    Generate a list of 1-local Pauli strings of N qubits.
+
+    Parameters
+    ----------
+    N : int
+        Number of qubits.
+    dtype : str, optional
+        Data type for the operators. Use 'complex128' for complex operators,
+        'float64' for real operators. Default is 'float64'.
+
+    Returns
+    -------
+    list
+        List of 1-local Pauli string operators as sparse matrices.
+
+    Notes
+    -----
+    If dtype='float64', complex strings (those with a Y operator) are excluded.
+    """
+    taus = []
+    for i in range(N):
+        for k in range(1,4):
+            pauli_indexes = np.zeros(N, dtype=int)
+            pauli_indexes[i] = k
+            taus.append(operator_from_indexes(pauli_indexes, dtype=dtype))
+    return taus
+
+
 def buildH(taus, h):
-    """efficiently compute sum_i h_i tau_i"""
+    """
+    Build a Hamiltonian from a list of pauli strings and coefficients.
+    Return sum_i h_i * tau_i
+
+    Parameters
+    ----------
+    taus : list
+        List of operators (as scipy.sparse.coo_matrix).
+    h : array_like
+        Coefficients for each operator.
+
+    Returns
+    -------
+    numpy.ndarray
+        The Hamiltonian matrix constructed as the weighted sum of operators.
+
+    Notes
+    -----
+    This function efficiently computes the Hamiltonian as:
+    H = sum_i h_i * tau_i
+    where h_i are the coefficients and tau_i are the operators.
+    """
     d = taus[0].shape[0]
     H = np.zeros((d,d), dtype=taus[0].dtype)
     for i in range(len(taus)):

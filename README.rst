@@ -1,14 +1,9 @@
-==================
 Quantum Mereology
-==================
-
-
+================
 
 .. image:: https://github.com/nicolasloizeau/quantum_mereology/actions/workflows/test.yml/badge.svg
    :target: https://github.com/nicolasloizeau/quantum_mereology/actions/workflows/test.yml
    :alt: Tests Status
-
-
 
 .. image:: https://img.shields.io/badge/docs-blue.svg
    :target: https://nicolasloizeau.github.io/quantum_mereology/
@@ -16,27 +11,40 @@ Quantum Mereology
 
 Numerical methods for quantum mereology
 
-This is a Python package that focuses on the following problem:
-Given a many body spin 1/2 Hamiltonian *H*, find a unitary *U* such that *U H U*\ :sup:`†` has a particular tensor product structure.
+This package focuses on the following problem :
+Given a many body spin 1/2 Hamiltonian :math:`H`, find a unitary :math:`U` such that
+:math:`U H U^\dagger` has a particular tensor product structure.
 In particular, minimize the cost function
-*C(h) = Σ_n |E_n-ε_n|*\ :sup:`2`
-where *E_n* are the eigenvalues of *H* and *ε_n* are the eigenvalues of *H'=Σ_i h_i τ_i* and *τ_i* are a set of Pauli strings that represent a particular tensor product structure.
+:math:`C(h) = \sum_{n} |E_n-\varepsilon_n|^2`
+where :math:`E_n` are the eigenvalues of :math:`H` and
+:math:`\varepsilon_n` are the eigenvalues of
+:math:`H'=\sum_i h_i \tau_i` and :math:`\tau_i` are a set of Pauli strings
+that represent a particular tensor product structure.
+
 
 Installation
-------------
+-----------
 
-From github:
-
-.. code-block:: bash
+From github::
 
     pip install git+https://github.com/nicolasloizeau/quantum_mereology.git
 
 Example
 -------
+Given H a GOE matrix, find a U such that UHU^\dagger is as 2-local as possible :
 
 .. code-block:: python
 
-    # Example code will go here
+    import numpy as np
+    from numpy.linalg import norm
+    from quantum_mereology import *
+    N = 8 #number of qubits
+    H = GOE(2**N)
+    taus = local2(N) # a list of 2-local pauli strings
+    result = localize(H, taus, maxiter=50, verbose=True) # optimization
+    H2 = result.U@H@result.U.T.conj() # localized Hamiltonian
+    print(norm(H2 - result.Hloc)/norm(H2)) # chech how good the results is
+
 
 Citation
 --------
