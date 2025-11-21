@@ -99,7 +99,7 @@ class PartitionerB(Partitioner):
     """
     Partitioner optimizing only over subsystem B.
     This is initialized exaclty like Partitioner.
-    x0 is of length DA+DB only, but only the last DB elements are optimized.
+    x0 is of length DA+DB, but only the last DB elements are optimized.
     The first DA elements are kept fixed to x0[:DA].
     """
 
