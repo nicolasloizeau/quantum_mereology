@@ -37,18 +37,18 @@ print(norm(H2 - result.Hloc)/norm(H2)) # chech how good the results is
 
 
 ## Develop
-###  Install dev version
+Install dev version
 ```
 cd quantum_mereology
 pip install -e .[dev]
 ```
 
-###  Run tests
+Run tests
 ```
 python -m pytest
 ```
 
-### Make the documentation
+Make the documentation
 ```
 cd docs
 make html
