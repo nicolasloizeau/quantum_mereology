@@ -121,6 +121,9 @@ class PartitionerB(Partitioner):
         G3 = -2 * spectrum.sum(axis=0)
         return G1 + G2 + G3
 
+    def initial_guess(self):
+        return self.x0[self.DA :]
+
 
 def partition(H, DA, verbose=False, maxiter=1000, x0=None, optimizeA=True):
     """Partition a Hamiltonian into two subsystems.

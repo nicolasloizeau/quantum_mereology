@@ -31,7 +31,7 @@ def test_gradientB():
     assert norm(g1 - g2) / norm(g1) < 1e-8, "gradient and finite difference do not agree"
 
 
-def test_partitioner():
+def run_partitioner(optimizeA=True):
     D = 2**8
     DA = 2  # dimention of subsystem A
     H = GOE(D)  # intial Hamiltonian
@@ -39,7 +39,7 @@ def test_partitioner():
 
     # we partition H into diagonal sectors A and B
     # U is the unitary matrix that partitions H
-    res = partition(H, DA, verbose=True)
+    res = partition(H, DA, verbose=True, optimizeA=optimizeA)
     U = res.U
     EA = res.EA
     EB = res.EB
@@ -59,3 +59,11 @@ def test_partitioner():
 
     # Check how good the partition is
     assert (norm(Hint) / norm(H)) < 5e-2
+
+
+def test_partitioner():
+    run_partitioner(optimizeA=True)
+
+
+def test_partitionerB():
+    run_partitioner(optimizeA=False)
