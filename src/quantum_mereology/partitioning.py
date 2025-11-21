@@ -76,10 +76,13 @@ class Partitioner:
             grad[i] = (self.cost(h + dh) - self.cost(h - dh)) / (2 * d)
         return grad
 
+    def initial_guess(self):
+        return self.x0
+
     def partition(self):
         res = minimize(
             self.cost,
-            self.x0,
+            self.initial_guess(),
             tol=1e-10,
             callback=self.callback,
             jac=self.gradient,
@@ -92,7 +95,34 @@ class Partitioner:
         return A, B, composep(p, self.p0)
 
 
-def partition(H, DA, verbose=False, maxiter=1000, x0=None):
+class PartitionerB(Partitioner):
+    """
+    Partitioner optimizing only over subsystem B.
+    This is initialized exaclty like Partitioner.
+    x0 is of length DA+DB only, but only the last DB elements are optimized.
+    The first DA elements are kept fixed to x0[:DA].
+    """
+
+    def __init__(self, spectrum, DA, extra_param=None, **kwargs):
+        super().__init__(spectrum, DA, **kwargs)
+
+    def get_AB(self, x):
+        return self.x0[: self.DA], x
+
+    def gradient(self, x):
+        A, B = self.get_AB(x)
+        DA = np.full(self.DB, self.DA)
+        G1 = DA * 2 * x
+        G2 = 2 * np.full(self.DB, np.sum(A))
+        AB = buildHA(A, self.DB) + buildHB(B, self.DA)
+        p = np.argsort(AB)
+        p = inversep(p)
+        spectrum = np.reshape(self.spectrum[p], (self.DA, self.DB))
+        G3 = -2 * spectrum.sum(axis=0)
+        return G1 + G2 + G3
+
+
+def partition(H, DA, verbose=False, maxiter=1000, x0=None, optimizeA=True):
     """Partition a Hamiltonian into two subsystems.
 
 
@@ -108,6 +138,8 @@ def partition(H, DA, verbose=False, maxiter=1000, x0=None):
         Maximum number of iterations for optimization, by default 1000.
     x0 : numpy.ndarray, optional
         Initial guess for optimization parameters, by default None.
+    optimizeA : bool, optional
+        Whether to optimize both subsystems (True) or only subsystem B (False), by default True.
 
     Returns
     -------
@@ -122,8 +154,13 @@ def partition(H, DA, verbose=False, maxiter=1000, x0=None):
     The Hamiltonian must be a square matrix with dimension divisible by DA.
     """
     assert len(H) % DA == 0, "H must be a square matrix with dimension divisible by DA"
+    # choose the right partitioner class based on optimizeA flag
+    if optimizeA:
+        partitioner = Partitioner
+    else:
+        partitioner = PartitionerB
     E, V = eigh(H)
-    part = Partitioner(E, DA, disp=verbose, maxiter=maxiter, x0=x0)
+    part = partitioner(E, DA, disp=verbose, maxiter=maxiter, x0=x0)
     EA, EB, p = part.partition()
     U = permutation_matrix(p).T.conj() @ V.T.conj()
     H2 = U @ H @ U.T.conj()
