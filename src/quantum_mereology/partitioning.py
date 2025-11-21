@@ -18,7 +18,7 @@ def buildHB(B, DA):
 
 
 class Partitioner:
-    def __init__(self, spectrum, DA, disp=False, x0=None, maxiter=1000):
+    def __init__(self, spectrum, DA, disp=False, x0=None, maxiter=1000, pin_A=None):
         self.p0 = np.argsort(spectrum)
         self.spectrum = spectrum[self.p0]
         self.D = len(spectrum)

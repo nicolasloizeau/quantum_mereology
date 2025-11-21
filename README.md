@@ -35,6 +35,26 @@ H2 = result.U@H@result.U.T.conj() # localized Hamiltonian
 print(norm(H2 - result.Hloc)/norm(H2)) # chech how good the results is
 ```
 
+
+## Develop
+###  Install dev version
+```
+cd quantum_mereology
+pip install -e .[dev]
+```
+
+###  Run tests
+```
+python -m pytest
+```
+
+### Make the documentation
+```
+cd docs
+make html
+```
+
+
 ## Citation
 
 ```bibtex
