@@ -18,7 +18,7 @@ def buildHB(B, DA):
 
 
 class Partitioner:
-    def __init__(self, spectrum, DA, disp=False, x0=None, maxiter=1000, pin_A=None):
+    def __init__(self, spectrum, DA, disp=False, x0=None, maxiter=1000):
         self.p0 = np.argsort(spectrum)
         self.spectrum = spectrum[self.p0]
         self.D = len(spectrum)
@@ -31,8 +31,10 @@ class Partitioner:
         self.DA = DA
         self.DB = self.D // DA
         self.x0 = x0
+        assert self.D == self.DA * self.DB, "spectrum length must be DA * DB"
         if self.x0 is None:
             self.x0 = np.random.random(self.DA + self.DB) - 0.5
+        assert len(self.x0) == self.DA + self.DB, "x0 must have length DA + DB"
 
     def callback(self, x):
         c = self.cost(x)
